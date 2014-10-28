@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(3dtext)
+project(ascii-pr0n)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses)
