@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "zoomer.h"
 
 #define hy screen_height/2
 #define hx screen_width/2
@@ -532,7 +533,9 @@ int main(int argc, char *argv[])
     em.loadIdentity();
 
     float r1 = 0.0f;
-
+    while(1) {
+        drawZommer();
+    }
     while(1) {
         getmaxyx(stdscr, screen_height, screen_width);
 
