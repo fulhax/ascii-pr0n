@@ -14,16 +14,16 @@ void drawZommer()
     time+=0.001f;
     attron(COLOR_PAIR((int)(time)%7+1));
 
-    float posoffset_x=sin(time)/PI*w;
-    float posoffset_y=cos(time)/PI*h;
+    float posoffset_x=sin(time)/PI;
+    float posoffset_y=cos(time)/PI;
 
     for(unsigned int y=0;y<h;y++)
     {
-        float ypos=(float)y/(float)h-0.5f;
+        float ypos=(float)y/(float)h-0.5f+posoffset_y;
 
         for(unsigned int x=0;x<w;x++)
         {
-            float xpos=(float)x/(float)w-0.5f;
+            float xpos=(float)x/(float)w-0.5f+posoffset_x;
             float angle=atan(ypos/xpos)+time*0.5;
             float dist=sqrt(xpos*xpos+ypos*ypos)-time;
             bool result=int(angle*2)%2;
