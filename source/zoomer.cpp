@@ -10,9 +10,9 @@ void drawZommer()
     int w,h;
     getmaxyx(stdscr,h,w);
     erase();
-    attron(COLOR_PAIR(2));
     static float time=0;
     time+=0.001f;
+    attron(COLOR_PAIR((int)(time)%7+1));
 
     float posoffset_x=sin(time)/PI*w;
     float posoffset_y=cos(time)/PI*h;
