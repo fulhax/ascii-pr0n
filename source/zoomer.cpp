@@ -6,13 +6,13 @@
 #define PI 3.1415926535897932384626433832795f
 
 void drawZoomer()
+
 {
     int w, h;
     getmaxyx(stdscr, h, w);
     erase();
     static float time = 0;
     time += 0.001f;
-    attron(COLOR_PAIR((int)(time) % 7 + 1));
 
     float posoffset_x = sin(time) / PI;
     float posoffset_y = cos(time) / PI;
@@ -26,6 +26,7 @@ void drawZoomer()
             float xpos   = (float)x / (float)w - 0.5f + posoffset_x;
             float angle  = atan(ypos / xpos) + time * 0.5;
             float dist   = sqrt(xpos * xpos + ypos * ypos) - time;
+            attron(COLOR_PAIR((int)(-dist*7) % 7 + 1));
             bool result  = int(angle * 2) % 2;
             bool result2 = int(dist * 10) % 2;
 
