@@ -12,27 +12,30 @@ void drawRandom()
 {
     static unsigned int frames = 0;
     static unsigned int drawfor = rand() % 250;
-    static unsigned int effect=rand()%3;
+    static unsigned int effect = rand() % 3;
     frames++;
 
     if(frames >= drawfor)
     {
-        drawfor = rand() % 1000+2000;
-        frames=0;
-        effect=rand()%3;
+        drawfor = rand() % 1000 + 2000;
+        frames = 0;
+        effect = rand() % 3;
     }
-    switch ( effect )
+
+    switch(effect)
     {
         case 0:
         {
-           drawZoomer();
+            drawZoomer();
             break;
         }
+
         case 1:
         {
             drawCubes(0);
             break;
         }
+
         case 2:
         {
             drawCubes(1);
@@ -47,6 +50,32 @@ void drawRandom()
 
 int main(int argc, char *argv[])
 {
+
+    int c;
+    bool cubes = 0;
+    bool zoomer = 0;
+
+    while((c = getopt(argc, argv, "czh")) != -1)
+    {
+        switch(c)
+        {
+            case 'c':
+                cubes = 1;
+                break;
+
+            case 'z':
+                zoomer = 1;
+                break;
+
+            case 'h':
+                printf("options:\n\t-c cubes\n\t-z zoomer\n");
+                return 0;
+                break;
+
+            default:
+                break;
+        }
+    }
 
     initscr();
     noecho();
@@ -70,29 +99,6 @@ int main(int argc, char *argv[])
     init_pair(12, COLOR_BLACK , COLOR_BLUE);
     init_pair(13, COLOR_BLACK , COLOR_CYAN);
     init_pair(14, COLOR_BLACK , COLOR_MAGENTA);
-    int c;
-    bool cubes = 0;
-    bool zoomer = 0;
-
-    while((c = getopt(argc, argv, "czh")) != -1)
-    {
-        switch(c)
-        {
-            case 'c':
-                cubes = 1;
-                break;
-
-            case 'z':
-                zoomer = 1;
-                break;
-
-            case 'h':
-                break;
-
-            default:
-                break;
-        }
-    }
 
     //while(1)
     //{
