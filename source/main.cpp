@@ -116,6 +116,7 @@ int main(int argc, char *argv[])
                 break;
 
             case 'q':
+                endwin();
                 return 0;
                 break;
         }
