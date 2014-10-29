@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "zoomer.h"
 #include "cubes.h"
+#include "palette.h"
 
 void drawRandom()
 {
@@ -77,6 +78,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    calcGradient();
     initscr();
     noecho();
     curs_set(0);
