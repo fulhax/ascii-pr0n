@@ -124,5 +124,5 @@ unsigned char getclosestcolor(unsigned char r, unsigned char g, unsigned char b)
         }
     }
 
-    return closest;
+    return closest+17;
 }
