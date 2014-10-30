@@ -28,20 +28,17 @@ void drawZoomer()
             float dist   = sqrt(xpos * xpos + ypos * ypos);
             float distwithtime   = dist - time;
             bool result  = int(angle * 2) % 2;
-            bool result2 = int(dist * 10) % 2;
-            int brightness=dist*200;
-            if(brightness>=100)
-                brightness=99;
+            bool result2 = int(distwithtime * 10) % 2;
+            int brightness = dist * 200;
+
+            if(brightness >= 100)
+            {
+                brightness = 99;
+            }
 
             if(result && result2)
             {
-                attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 7) % 240]+17));
-                mvprintw(y, x, "x");
-            }
-
-            if(!result && !result2)
-            {
-                attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 16) % 240]+17));
+                attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 7) % 240] + 17));
                 mvprintw(y, x, "x");
             }
         }
