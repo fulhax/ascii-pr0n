@@ -6,7 +6,10 @@ set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses)
 
 file(GLOB COMMON_SRC
-    "source/*.c*"
+    "source/cubes.cpp"
+    "source/main.cpp"
+    "source/palette.cpp"
+    "source/zoomer.cpp"
     )
 
 include_directories(
