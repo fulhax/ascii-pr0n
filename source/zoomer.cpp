@@ -1,8 +1,8 @@
 #include "zoomer.h"
+#include "palette.h"
 #include <math.h>
 #include <curses.h>
 #include <stdlib.h>
-
 #define PI 3.1415926535897932384626433832795f
 
 void drawZoomer()
@@ -25,13 +25,23 @@ void drawZoomer()
         {
             float xpos   = (float)x / (float)w - 0.5f + posoffset_x;
             float angle  = atan(ypos / xpos) + time * 0.5;
-            float dist   = sqrt(xpos * xpos + ypos * ypos) - time;
-            attron(COLOR_PAIR((int)(-dist*7) % 7 + 1));
+            float dist   = sqrt(xpos * xpos + ypos * ypos);
+            float distwithtime   = dist - time;
             bool result  = int(angle * 2) % 2;
             bool result2 = int(dist * 10) % 2;
+            int brightness=dist*200;
+            if(brightness>=100)
+                brightness=99;
 
             if(result && result2)
             {
+                attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 7) % 240]+17));
+                mvprintw(y, x, "x");
+            }
+
+            if(!result && !result2)
+            {
+                attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 16) % 240]+17));
                 mvprintw(y, x, "x");
             }
         }
