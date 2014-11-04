@@ -636,6 +636,11 @@ void drawCubes(bool wireframe)
 
         r1 += 0.0001f;
 
+        if(r1 >= 2048.0f) // max a float can get to with +=0.0001f
+        {
+            r1 = 0.0f;
+        }
+
         refresh();
     }
 }

@@ -14,6 +14,11 @@ void drawZoomer()
     static float time = 0;
     time += 0.001f;
 
+    if(time >= 32768.0f) // max a float can get to with +=0.001f
+    {
+        time = 0.0f;
+    }
+
     float posoffset_x = sin(time) / PI;
     float posoffset_y = cos(time) / PI;
 
