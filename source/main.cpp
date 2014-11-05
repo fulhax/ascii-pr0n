@@ -21,7 +21,7 @@ void drawRandom()
     {
         drawfor = rand() % 1000 + 2000;
         frames = 0;
-        effect = rand() % 3;
+        effect = rand() % 4;
     }
 
     switch(effect)
@@ -41,6 +41,12 @@ void drawRandom()
         case 2:
         {
             drawCubes(1);
+            break;
+        }
+
+        case 3:
+        {
+            drawPattern();
             break;
         }
 
