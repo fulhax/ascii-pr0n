@@ -10,6 +10,7 @@ file(GLOB COMMON_SRC
     "source/main.cpp"
     "source/palette.cpp"
     "source/zoomer.cpp"
+    "source/pattern.cpp"
     )
 
 include_directories(

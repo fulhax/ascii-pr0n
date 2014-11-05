@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "zoomer.h"
 #include "cubes.h"
+#include "pattern.h"
 #include "palette.h"
 
 void drawRandom()
@@ -55,23 +56,36 @@ int main(int argc, char *argv[])
     int c;
     bool cubes = 0;
     bool zoomer = 0;
+    bool pattern = 0;
 
-    while((c = getopt(argc, argv, "czh")) != -1)
+    while((c = getopt(argc, argv, "czph")) != -1)
     {
         switch(c)
         {
             case 'c':
+            {
                 cubes = 1;
                 break;
+            }
 
             case 'z':
+            {
                 zoomer = 1;
                 break;
+            }
+
+            case 'p':
+            {
+                pattern = 1;
+                break;
+            }
 
             case 'h':
-                printf("options:\n\t-c cubes\n\t-z zoomer\n");
+            {
+                printf("options:\n\t-c cubes\n\t-z zoomer\n-p pattern\n");
                 return 0;
                 break;
+            }
 
             default:
                 break;
@@ -118,6 +132,10 @@ int main(int argc, char *argv[])
         else if(zoomer)
         {
             drawZoomer();
+        }
+        else if(pattern)
+        {
+            drawPattern();
         }
         else
         {
