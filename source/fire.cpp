@@ -15,19 +15,24 @@ unsigned char lerp(float r, float g, float b, float r2, float g2, float b2, floa
 
 void setupFirepal()
 {
-    for(int i = 0; i < 32; i++)
+    for(int i = 0; i < 24; i++)
     {
-        firepal[i] = lerp(0, 0, 0, 255, 0, 0, (float)i / 32);
+        firepal[i] = lerp(0, 0, 0, 96, 96, 96, (float)i / 24);
+    }
+
+    for(int i = 0; i < 24; i++)
+    {
+        firepal[i + 25] = lerp(96, 96 , 96, 255, 0, 0, (float)i / 24);
     }
 
     for(int i = 0; i < 32; i++)
     {
-        firepal[i + 33] = lerp(255, 0, 0, 255, 255, 0, (float)i / 32);
+        firepal[i + 50] = lerp(255, 0, 0, 255, 255, 0, (float)i / 24);
     }
 
-    for(int i = 0; i < 33; i++)
+    for(int i = 0; i < 24; i++)
     {
-        firepal[i + 66] = lerp(255, 255, 0, 255, 255, 255, (float)i / 33);
+        firepal[i + 75] = lerp(255, 255, 0, 255, 255, 255, (float)i / 24);
     }
 
 }
@@ -58,7 +63,7 @@ void drawFire()
 
     for(int i = 0; i < 60; i++)
     {
-        buffer[bufferw * (bufferh - 1) + rand() % bufferw] = (rand() % 10) * 10;
+        buffer[bufferw * (bufferh - 1) + rand() % bufferw] = (rand() % 10) * 8+20;
         //buffer[rand() % bufferw] = rand()%100;
     }
 
@@ -72,8 +77,8 @@ void drawFire()
             heat += buffer[pos];
             heat += buffer[pos - 1];
             heat += buffer[pos + 2];
-            heat += buffer[pos + w] * 4;
-            buffer[pos] = heat / 7;
+            heat += buffer[pos + w] * 6;
+            buffer[pos] = heat / 9;
 
         }
     }
