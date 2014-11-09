@@ -9,6 +9,7 @@
 #include "cubes.h"
 #include "pattern.h"
 #include "palette.h"
+#include "fire.h"
 
 void drawRandom()
 {
@@ -60,11 +61,12 @@ int main(int argc, char *argv[])
 {
 
     int c;
-    bool cubes = 0;
-    bool zoomer = 0;
+    bool cubes   = 0;
+    bool zoomer  = 0;
     bool pattern = 0;
+    bool fire    = 0;
 
-    while((c = getopt(argc, argv, "czph")) != -1)
+    while((c = getopt(argc, argv, "czpfh")) != -1)
     {
         switch(c)
         {
@@ -86,9 +88,15 @@ int main(int argc, char *argv[])
                 break;
             }
 
+            case 'f':
+            {
+                fire = 1;
+                break;
+            }
+
             case 'h':
             {
-                printf("options:\n\t-c cubes\n\t-z zoomer\n-p pattern\n");
+                printf("options:\n\t-c cubes\n\t-z zoomer\n-p pattern\n-f fire\n");
                 return 0;
                 break;
             }
@@ -142,6 +150,10 @@ int main(int argc, char *argv[])
         else if(pattern)
         {
             drawPattern();
+        }
+        else if(fire)
+        {
+            drawFire();
         }
         else
         {
