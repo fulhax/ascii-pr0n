@@ -22,7 +22,7 @@ void drawRandom()
     {
         drawfor = rand() % 1000 + 2000;
         frames = 0;
-        effect = rand() % 4;
+        effect = rand() % 5;
     }
 
     switch(effect)
@@ -48,6 +48,12 @@ void drawRandom()
         case 3:
         {
             drawPattern();
+            break;
+        }
+
+        case 4:
+        {
+            drawFire();
             break;
         }
 
