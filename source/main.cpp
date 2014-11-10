@@ -10,6 +10,7 @@
 #include "pattern.h"
 #include "palette.h"
 #include "fire.h"
+#include "rotozoomer.h"
 
 void drawRandom()
 {
@@ -22,7 +23,7 @@ void drawRandom()
     {
         drawfor = rand() % 1000 + 2000;
         frames = 0;
-        effect = rand() % 5;
+        effect = rand() % 6;
     }
 
     switch(effect)
@@ -57,6 +58,12 @@ void drawRandom()
             break;
         }
 
+        case 5:
+        {
+            drawRotozoomer();
+            break;
+        }
+
         default:
             break;
     }
@@ -67,12 +74,13 @@ int main(int argc, char *argv[])
 {
 
     int c;
-    bool cubes   = 0;
-    bool zoomer  = 0;
-    bool pattern = 0;
-    bool fire    = 0;
+    bool cubes      = 0;
+    bool zoomer     = 0;
+    bool pattern    = 0;
+    bool fire       = 0;
+    bool rotozoomer = 0;
 
-    while((c = getopt(argc, argv, "czpfh")) != -1)
+    while((c = getopt(argc, argv, "czprfh")) != -1)
     {
         switch(c)
         {
@@ -100,6 +108,12 @@ int main(int argc, char *argv[])
                 break;
             }
 
+            case 'r':
+            {
+                rotozoomer = 1;
+                break;
+            }
+
             case 'h':
             {
                 printf("options:\n\t-c cubes\n\t-z zoomer\n-p pattern\n-f fire\n");
@@ -113,6 +127,7 @@ int main(int argc, char *argv[])
     }
 
     calcGradient();
+    correctImageColors();
     initscr();
     noecho();
     curs_set(0);
@@ -160,6 +175,10 @@ int main(int argc, char *argv[])
         else if(fire)
         {
             drawFire();
+        }
+        else if(rotozoomer)
+        {
+            drawRotozoomer();
         }
         else
         {
