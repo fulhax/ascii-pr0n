@@ -39,10 +39,10 @@ void drawRotozoomer()
     static unsigned int time = 0;
     time += 2;
 
-    float angle = (float)time/50;
-    angle = sin(angle);
-    float scale = 10*(sin((float)time/50)+1.5);
-    scale=1;
+    float angle = (float)time / 500.0f;
+    //angle = sin(angle);
+    float scale = 4 * (sin((float)time / 1000.0f) + 0.2);
+    //scale = 2.5;
     float sa = scale * sin(angle);
     float ca = scale * cos(angle);
 
@@ -50,10 +50,23 @@ void drawRotozoomer()
     {
         for(int x = 0; x < w; x++)
         {
-            int ix=sa*(float)x;
-            int iy=ca*(float)y;
-            ix%=IMAGEW;
-            iy%=IMAGEH;
+            int pixelx = x / 2 - w / 4;
+            int pixely = y - h / 2;
+            int ix = sa * (float)pixelx + ca * pixely;
+            int iy = sa * (float)pixely - ca * pixelx;
+
+            if(ix < 0)
+            {
+                ix = IMAGEW - ix & 0x7fffffff;
+            }
+
+            if(iy < 0)
+            {
+                iy = IMAGEH - iy & 0x7fffffff;
+            }
+
+            ix %= IMAGEW;
+            iy %= IMAGEH;
             unsigned char color = imagecorrectedcolors[ix + iy * IMAGEW];
 
             if(color != 0)
