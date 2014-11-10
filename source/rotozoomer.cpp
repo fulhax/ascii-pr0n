@@ -48,10 +48,11 @@ void drawRotozoomer()
 
     for(int y = 0; y < h; y++)
     {
+        int pixely = y - h / 2;
+
         for(int x = 0; x < w; x++)
         {
             int pixelx = x / 2 - w / 4;
-            int pixely = y - h / 2;
             int ix = sa * (float)pixelx + ca * pixely;
             int iy = sa * (float)pixely - ca * pixelx;
 

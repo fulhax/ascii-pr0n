@@ -63,8 +63,18 @@ void drawFire()
 
     for(int i = 0; i < 60; i++)
     {
-        buffer[bufferw * (bufferh - 1) + rand() % bufferw] = (rand() % 10) * 8+20;
+        buffer[bufferw * (bufferh - 1) + rand() % bufferw] = (rand() % 10) * 8 + 20;
         //buffer[rand() % bufferw] = rand()%100;
+    }
+
+    buffer[rand() % (bufferw * bufferh)] = 99;
+    buffer[rand() % (bufferw * bufferh)] = 99;
+    buffer[rand() % (bufferw * bufferh)] = 99;
+
+    for(unsigned int y = 0; y < h; y++)
+    {
+        buffer[0 + y * w] = 0;
+        buffer[w-1 + y * w] = 0;
     }
 
     for(unsigned int y = 0; y < h - 1; y++)
@@ -76,7 +86,7 @@ void drawFire()
             unsigned short heat = 0;
             heat += buffer[pos];
             heat += buffer[pos - 1];
-            heat += buffer[pos + 2];
+            heat += buffer[pos + 1];
             heat += buffer[pos + w] * 6;
             buffer[pos] = heat / 9;
 
