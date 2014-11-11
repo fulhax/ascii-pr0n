@@ -46,10 +46,10 @@ void drawFire()
     static unsigned int bufferh = 99999;
     static unsigned char *buffer = 0;
 
-    if(bufferw != w || bufferh != h)
+    if(bufferw != w || bufferh != h+2)
     {
         bufferw = w;
-        bufferh = h;
+        bufferh = h+2;
 
         if(buffer != 0)
         {
@@ -77,7 +77,7 @@ void drawFire()
         buffer[w-1 + y * w] = 0;
     }
 
-    for(unsigned int y = 0; y < h - 1; y++)
+    for(unsigned int y = 0; y < bufferh - 1; y++)
     {
 
         for(unsigned int x = 1; x < w - 1; x++)
