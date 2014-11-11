@@ -52,7 +52,7 @@ void drawRotozoomer()
 
         for(int x = 0; x < w; x++)
         {
-            int pixelx = x / 2 - w / 4;
+            float pixelx = (float)x / 2.0f - (float)w / 4.0f;
             int ix = sa * (float)pixelx + ca * pixely;
             int iy = sa * (float)pixely - ca * pixelx;
 
