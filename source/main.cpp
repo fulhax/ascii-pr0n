@@ -24,7 +24,7 @@ void drawRandom()
     {
         drawfor = rand() % 1000 + 2000;
         frames = 0;
-        effect = rand() % 6;
+        effect = rand() % 7;
     }
 
     switch(effect)
@@ -65,6 +65,11 @@ void drawRandom()
             break;
         }
 
+        case 6:
+        {
+            drawBars();
+            break;
+        }
         default:
             break;
     }
