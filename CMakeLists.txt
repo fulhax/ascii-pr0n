@@ -13,6 +13,7 @@ file(GLOB COMMON_SRC
     "source/pattern.cpp"
     "source/fire.cpp"
     "source/rotozoomer.cpp"
+    "source/bars.cpp"
     )
 
 include_directories(

@@ -11,6 +11,7 @@
 #include "palette.h"
 #include "fire.h"
 #include "rotozoomer.h"
+#include "bars.h"
 
 void drawRandom()
 {
@@ -79,8 +80,9 @@ int main(int argc, char *argv[])
     bool pattern    = 0;
     bool fire       = 0;
     bool rotozoomer = 0;
+    bool bars       = 0;
 
-    while((c = getopt(argc, argv, "czprfh")) != -1)
+    while((c = getopt(argc, argv, "bczprfh")) != -1)
     {
         switch(c)
         {
@@ -111,6 +113,12 @@ int main(int argc, char *argv[])
             case 'r':
             {
                 rotozoomer = 1;
+                break;
+            }
+
+            case 'b':
+            {
+                bars = 1;
                 break;
             }
 
@@ -179,6 +187,10 @@ int main(int argc, char *argv[])
         else if(rotozoomer)
         {
             drawRotozoomer();
+        }
+        else if(bars)
+        {
+            drawBars();
         }
         else
         {
