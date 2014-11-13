@@ -12,6 +12,7 @@
 #include "fire.h"
 #include "rotozoomer.h"
 #include "bars.h"
+#include "tunnel.h"
 
 void drawRandom()
 {
@@ -24,7 +25,7 @@ void drawRandom()
     {
         drawfor = rand() % 1000 + 2000;
         frames = 0;
-        effect = rand() % 7;
+        effect = rand() % 8;
     }
 
     switch(effect)
@@ -70,6 +71,13 @@ void drawRandom()
             drawBars();
             break;
         }
+
+        case 7:
+        {
+            drawTunnel();
+            break;
+        }
+
         default:
             break;
     }
@@ -86,8 +94,9 @@ int main(int argc, char *argv[])
     bool fire       = 0;
     bool rotozoomer = 0;
     bool bars       = 0;
+    bool tunnel     = 0;
 
-    while((c = getopt(argc, argv, "bczprfh")) != -1)
+    while((c = getopt(argc, argv, "bczprfth")) != -1)
     {
         switch(c)
         {
@@ -127,9 +136,21 @@ int main(int argc, char *argv[])
                 break;
             }
 
+            case 't':
+            {
+                tunnel = 1;
+                break;
+            }
+
             case 'h':
             {
-                printf("options:\n\t-c cubes\n\t-z zoomer\n-p pattern\n-f fire\n");
+                printf("options:\n");
+                printf("\t-b bars\n");
+                printf("\t-c cubes\n");
+                printf("\t-f fire\n");
+                printf("\t-p pattern\n");
+                printf("\t-t tunnel\n");
+                printf("\t-z zoomer\n");
                 return 0;
                 break;
             }
@@ -196,6 +217,10 @@ int main(int argc, char *argv[])
         else if(bars)
         {
             drawBars();
+        }
+        else if(tunnel)
+        {
+            drawTunnel();
         }
         else
         {
