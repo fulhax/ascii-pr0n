@@ -4,6 +4,7 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/param.h>
 
 void drawTunnel()
 {
@@ -38,54 +39,36 @@ void drawTunnel()
         }
     }
 
-    int voffset = sin((float)((bufferh / 3)+time/15) / 5.0f) * 4;
+    int voffset = sin((float)((bufferh / 3) + time / 15) / 5.0f) * 4;
+    int sub = 20;
+
+    int minx = MIN(MAX(bufferh / 3 + voffset, 0), bufferw - 1);
+    int maxx = MAX(MIN(bufferw - bufferh / 3 + voffset, bufferw - 1), minx);
 
     for(unsigned int y = 0; y < h; y++)
     {
-
-        int minx = bufferh / 3 + voffset;
-        int maxx = bufferw - bufferh / 3 + voffset;
-
-        if(minx < 0)
-        {
-            minx = 0;
-        }
-
-        if(maxx >= bufferw)
-        {
-            maxx = bufferw;
-        }
+        sub = MAX(sub - 1, 0);
 
         for(unsigned int x = 0; x < minx; x++)
         {
-            unsigned char brightness = 100 - (float)(x) / minx * 80;
-            buffer[x + y * bufferw] = colorGradient[brightness][239];
+            unsigned char brightness = 90 - (float)(x) / minx * 80;
+            brightness = MAX(brightness - sub, 0);
+            buffer[x + y * bufferw] = colorGradient[brightness - sub][239];
         }
 
         for(unsigned int x = maxx; x < bufferw; x++)
         {
-            //unsigned char brightness = (float)(x - maxx) / maxx * 80+20;
-            unsigned char brightness = 100 - (1.0f-(float)(x-maxx) / maxx) * 80;
-            buffer[x + y * bufferw] = colorGradient[brightness][239];
+            unsigned char brightness = 90 - (1.0f - (float)(x - maxx) / (bufferw - maxx)) * 80;
+            buffer[x + y * bufferw] = colorGradient[brightness - sub][239];
         }
     }
 
     for(unsigned int y = 0; y < h / 3; y++)
     {
-        unsigned char brightness = 100 - (float)(y) / (h / 3) * 80;
-        int offset = sin((float)(y +time/15)/ 5.0f) * 4;
-        int minx = y + offset;
-        int maxx = bufferw - y + offset;
-
-        if(minx < 0)
-        {
-            minx = 0;
-        }
-
-        if(maxx >= bufferw)
-        {
-            maxx = bufferw;
-        }
+        unsigned char brightness = 90 - (float)(y) / (bufferh / 3) * 80;
+        int offset = sin((float)(y + time / 15) / 5.0f) * 4;
+        int minx = MAX((int)y + offset, 0);
+        int maxx = MIN(bufferw - (int)y + offset, bufferw);
 
         for(unsigned int x = minx ; x < maxx ; x++)
         {
