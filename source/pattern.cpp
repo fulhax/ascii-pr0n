@@ -18,8 +18,8 @@ void drawPattern()
 
         for(unsigned int x = 0; x < w; x++)
         {
-            int brightness = ((25 * x) / w * (25 * y) / h + time) % 100;
-            attron(COLOR_PAIR(colorGradient[brightness][color]));
+            int brightness = (int)((float)(40 * x) / (float)w * (float)(40 * y) / (float)h + time) % 100;
+            attron(COLOR_PAIR(colorGradient[brightness][239]));
             mvprintw(y, x, "x");
         }
     }
