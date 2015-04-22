@@ -13,10 +13,10 @@ void drawSand()
     static unsigned int bufferh = 99999;
     static unsigned char *buffer = 0;
 
-    if(bufferw != w || bufferh != h + 1)
+    if(bufferw != w || bufferh != h + 2)
     {
         bufferw = w;
-        bufferh = h + 1;
+        bufferh = h + 2;
 
         if(buffer != 0)
         {
@@ -29,12 +29,20 @@ void drawSand()
     }
 
     // sand logic here
+    static unsigned char sandBrightness = 99;
+    static unsigned int frame = 0;
+    frame++;
 
-    for(unsigned int  i = 0; i < bufferw; i++)
+    //if(frame > 20)
+    {
+        sandBrightness = (sandBrightness + 1) % 100;
+    }
+
+    for(unsigned int  i = 0; i < bufferw ; i++)
     {
         if(rand() % 10 == 0)
         {
-            buffer[i] = rand() % 255;
+            buffer[i] = colorGradient[sandBrightness][15];
         }
         else
         {
@@ -58,6 +66,37 @@ void drawSand()
                     buffer[offset2 + x] = 0;
                 }
             }
+        }
+    }
+
+    for(unsigned int y = bufferh - 1; y > 1; y--)
+    {
+        unsigned int offset1 = y * bufferw;
+        unsigned int offset2 = y * bufferw - bufferw;
+        unsigned int offset3 = y * bufferw + bufferw;
+
+        for(unsigned int x = 0; x < bufferw - 1; x++)
+        {
+                if(buffer[offset1 + x + 1] == 0 && buffer[offset3 + x] != 0)
+                {
+                    buffer[offset1 + x + 1] = buffer[offset2 + x ];
+                    buffer[offset2 + x ] = 0;
+                }
+        }
+    }
+    for(unsigned int y = bufferh - 1; y > 1; y--)
+    {
+        unsigned int offset1 = y * bufferw;
+        unsigned int offset2 = y * bufferw - bufferw;
+        unsigned int offset3 = y * bufferw + bufferw;
+
+        for(unsigned int x = 0; x < bufferw - 1; x++)
+        {
+                if(buffer[offset1 + x - 1] == 0 && buffer[offset3 + x] != 0)
+                {
+                    buffer[offset1 + x - 1] = buffer[offset2 + x ];
+                    buffer[offset2 + x ] = 0;
+                }
         }
     }
 
@@ -99,7 +138,7 @@ void drawSand()
 
         for(unsigned int x = 0; x < w; x++)
         {
-            unsigned char color = buffer[x + y * w];
+            unsigned char color = buffer[x + y * w + w];
             attron(COLOR_PAIR(colorGradient[99][color]));
             mvprintw(y, x, "x");
         }
