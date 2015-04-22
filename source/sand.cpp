@@ -77,26 +77,27 @@ void drawSand()
 
         for(unsigned int x = 0; x < bufferw - 1; x++)
         {
-                if(buffer[offset1 + x + 1] == 0 && buffer[offset3 + x] != 0)
-                {
-                    buffer[offset1 + x + 1] = buffer[offset2 + x ];
-                    buffer[offset2 + x ] = 0;
-                }
+            if(buffer[offset1 + x + 1] == 0 && buffer[offset3 + x] != 0)
+            {
+                buffer[offset1 + x + 1] = buffer[offset2 + x ];
+                buffer[offset2 + x ] = 0;
+            }
         }
     }
+
     for(unsigned int y = bufferh - 1; y > 1; y--)
     {
         unsigned int offset1 = y * bufferw;
         unsigned int offset2 = y * bufferw - bufferw;
         unsigned int offset3 = y * bufferw + bufferw;
 
-        for(unsigned int x = 0; x < bufferw - 1; x++)
+        for(unsigned int x = 0; x < bufferw ; x++)
         {
-                if(buffer[offset1 + x - 1] == 0 && buffer[offset3 + x] != 0)
-                {
-                    buffer[offset1 + x - 1] = buffer[offset2 + x ];
-                    buffer[offset2 + x ] = 0;
-                }
+            if(buffer[offset1 + x - 1] == 0 && buffer[offset3 + x] != 0)
+            {
+                buffer[offset1 + x - 1] = buffer[offset2 + x ];
+                buffer[offset2 + x ] = 0;
+            }
         }
     }
 
