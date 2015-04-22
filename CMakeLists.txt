@@ -15,6 +15,7 @@ file(GLOB COMMON_SRC
     "source/rotozoomer.cpp"
     "source/bars.cpp"
     "source/tunnel.cpp"
+    "source/sand.cpp"
     )
 
 include_directories(

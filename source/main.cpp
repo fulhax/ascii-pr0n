@@ -13,6 +13,7 @@
 #include "rotozoomer.h"
 #include "bars.h"
 #include "tunnel.h"
+#include "sand.h"
 
 void drawRandom()
 {
@@ -31,52 +32,52 @@ void drawRandom()
     switch(effect)
     {
         case 0:
-        {
-            drawZoomer();
-            break;
-        }
+            {
+                drawZoomer();
+                break;
+            }
 
         case 1:
-        {
-            drawCubes(0);
-            break;
-        }
+            {
+                drawCubes(0);
+                break;
+            }
 
         case 2:
-        {
-            drawCubes(1);
-            break;
-        }
+            {
+                drawCubes(1);
+                break;
+            }
 
         case 3:
-        {
-            drawPattern();
-            break;
-        }
+            {
+                drawPattern();
+                break;
+            }
 
         case 4:
-        {
-            drawFire();
-            break;
-        }
+            {
+                drawFire();
+                break;
+            }
 
         case 5:
-        {
-            drawRotozoomer();
-            break;
-        }
+            {
+                drawRotozoomer();
+                break;
+            }
 
         case 6:
-        {
-            drawBars();
-            break;
-        }
+            {
+                drawBars();
+                break;
+            }
 
         case 7:
-        {
-            drawTunnel();
-            break;
-        }
+            {
+                drawTunnel();
+                break;
+            }
 
         default:
             break;
@@ -95,65 +96,72 @@ int main(int argc, char *argv[])
     bool rotozoomer = 0;
     bool bars       = 0;
     bool tunnel     = 0;
+    bool sand       = 0;
 
-    while((c = getopt(argc, argv, "bczprfth")) != -1)
+    while((c = getopt(argc, argv, "bczprftsh")) != -1)
     {
         switch(c)
         {
             case 'c':
-            {
-                cubes = 1;
-                break;
-            }
+                {
+                    cubes = 1;
+                    break;
+                }
 
             case 'z':
-            {
-                zoomer = 1;
-                break;
-            }
+                {
+                    zoomer = 1;
+                    break;
+                }
 
             case 'p':
-            {
-                pattern = 1;
-                break;
-            }
+                {
+                    pattern = 1;
+                    break;
+                }
 
             case 'f':
-            {
-                fire = 1;
-                break;
-            }
+                {
+                    fire = 1;
+                    break;
+                }
 
             case 'r':
-            {
-                rotozoomer = 1;
-                break;
-            }
+                {
+                    rotozoomer = 1;
+                    break;
+                }
 
             case 'b':
-            {
-                bars = 1;
-                break;
-            }
+                {
+                    bars = 1;
+                    break;
+                }
 
             case 't':
-            {
-                tunnel = 1;
-                break;
-            }
+                {
+                    tunnel = 1;
+                    break;
+                }
+            case 's':
+                {
+                    sand = 1;
+                    break;
+                }
 
             case 'h':
-            {
-                printf("options:\n");
-                printf("\t-b bars\n");
-                printf("\t-c cubes\n");
-                printf("\t-f fire\n");
-                printf("\t-p pattern\n");
-                printf("\t-t tunnel\n");
-                printf("\t-z zoomer\n");
-                return 0;
-                break;
-            }
+                {
+                    printf("options:\n");
+                    printf("\t-b bars\n");
+                    printf("\t-c cubes\n");
+                    printf("\t-f fire\n");
+                    printf("\t-p pattern\n");
+                    printf("\t-t tunnel\n");
+                    printf("\t-z zoomer\n");
+                    printf("\t-s sand\n");
+                    return 0;
+                    break;
+                }
 
             default:
                 break;
@@ -221,6 +229,10 @@ int main(int argc, char *argv[])
         else if(tunnel)
         {
             drawTunnel();
+        }
+        else if(sand)
+        {
+            drawSand();
         }
         else
         {
