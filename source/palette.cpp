@@ -126,3 +126,9 @@ unsigned char getclosestcolor(unsigned char r, unsigned char g, unsigned char b)
 
     return closest+17;
 }
+
+unsigned char lerp(float r, float g, float b, float r2, float g2, float b2, float f)
+{
+    float invf = 1.0f - f;
+    return getclosestcolor(r * invf + r2 * f, g * invf + g2 * f, b * invf + b2 * f);
+}

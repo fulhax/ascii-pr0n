@@ -5,6 +5,33 @@
 #include <stdlib.h>
 #include <string.h>
 
+unsigned char sandpal[100];
+
+void setupSandpal()
+{
+    sandpal[0] = 17;
+
+    for(int i = 1; i < 24; i++)
+    {
+        sandpal[i] = lerp(96, 96, 96, 255, 255, 255, (float)i / 24);
+    }
+
+    for(int i = 0; i < 24; i++)
+    {
+        sandpal[i + 25] = lerp(96, 96 , 96, 255, 192, 192, (float)i / 24);
+    }
+
+    for(int i = 0; i < 32; i++)
+    {
+        sandpal[i + 50] = lerp(100, 100, 50, 255, 255, 192, (float)i / 24);
+    }
+
+    for(int i = 0; i < 24; i++)
+    {
+        sandpal[i + 75] = lerp(100, 200, 150, 255, 255, 255, (float)i / 24);
+    }
+
+}
 void drawSand()
 {
     static unsigned int w, h;
@@ -23,7 +50,7 @@ void drawSand()
             delete buffer;
         }
 
-        //setupFirepal();
+        setupSandpal();
         buffer = new unsigned char[bufferw * bufferh];
         memset(buffer, 0, bufferw * bufferh);
     }
@@ -33,16 +60,17 @@ void drawSand()
     static unsigned int frame = 0;
     frame++;
 
-    //if(frame > 20)
+    if(frame > 4)
     {
         sandBrightness = (sandBrightness + 1) % 100;
+        frame = 0;
     }
 
     for(unsigned int  i = 0; i < bufferw ; i++)
     {
         if(rand() % 10 == 0)
         {
-            buffer[i] = colorGradient[sandBrightness][15];
+            buffer[i] = sandBrightness;
         }
         else
         {
@@ -118,12 +146,13 @@ void drawSand()
     {
         openhole++;
         unsigned int offset = bufferw * (bufferh - 1);
+        int holejitteredpos = holepos + rand() % 5 - 2;
 
         for(int i = 0; i < holew; i++)
         {
-            if((i + holepos) >= 0 && (i + holepos) < bufferw)
+            if((i + holejitteredpos) >= 0 && (i + holejitteredpos) < bufferw)
             {
-                buffer[offset + i + holepos] = 0;
+                buffer[offset + i + holejitteredpos] = 0;
             }
         }
     }
@@ -140,7 +169,7 @@ void drawSand()
         for(unsigned int x = 0; x < w; x++)
         {
             unsigned char color = buffer[x + y * w + w];
-            attron(COLOR_PAIR(colorGradient[99][color]));
+            attron(COLOR_PAIR(sandpal[color]));
             mvprintw(y, x, "x");
         }
     }
