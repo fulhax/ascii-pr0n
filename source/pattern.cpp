@@ -11,7 +11,7 @@ void drawPattern()
     erase();
     static unsigned int time = 0;
     time += 2;
-    unsigned char color = (time / 20) % 240;
+    //unsigned char color = (time / 20) % 240;
 
     for(unsigned int y = 0; y < h; y++)
     {

@@ -160,7 +160,6 @@ int main(int argc, char *argv[])
                     printf("\t-z zoomer\n");
                     printf("\t-s sand\n");
                     return 0;
-                    break;
                 }
 
             default:
