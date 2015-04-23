@@ -130,7 +130,7 @@ void drawSand()
     }
 
     static int holepos           = 0;
-    static unsigned int holew    = 0;
+    static unsigned int holew    = 1;
     static unsigned int openhole = 0;
     static unsigned char holedepth = 5;
 
@@ -145,8 +145,13 @@ void drawSand()
     if(openhole < holedepth)
     {
         openhole++;
+        unsigned char jitteramount=holew/2;
+        if(jitteramount<=1)
+        {
+            jitteramount=2;
+        }
         unsigned int offset = bufferw * (bufferh - 1);
-        int holejitteredpos = holepos + rand() % 5 - 2;
+        int holejitteredpos = holepos + rand() % jitteramount - jitteramount/2;
 
         for(int i = 0; i < holew; i++)
         {
