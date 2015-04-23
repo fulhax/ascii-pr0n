@@ -110,7 +110,7 @@ unsigned char getclosestcolor(unsigned char r, unsigned char g, unsigned char b)
     unsigned char closest = 0;
     float closestdist = 10000000.0f;
 
-    for(unsigned short i = 0; i < 240; i ++)
+    for(unsigned short i = 0; i < 239; i ++)
     {
         short rdist = r - inputpal[i * 3];
         short gdist = g - inputpal[i * 3 + 1];
