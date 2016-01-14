@@ -39,21 +39,29 @@ void drawFire()
     getmaxyx(stdscr, h, w);
     static unsigned int bufferw = 99999;
     static unsigned int bufferh = 99999;
-    static unsigned char *buffer = 0;
+    static unsigned char* buffer = 0;
+    static unsigned char* buffer2 = 0;
 
-    if(bufferw != w || bufferh != h+2)
+    if(bufferw != w || bufferh != h + 2)
     {
         bufferw = w;
-        bufferh = h+2;
+        bufferh = h + 2;
 
         if(buffer != 0)
         {
             delete buffer;
         }
 
+        if(buffer2 != 0)
+        {
+            delete buffer2;
+        }
+
         setupFirepal();
         buffer = new unsigned char[bufferw * bufferh];
+        buffer2 = new unsigned char[bufferw * bufferh];
         memset(buffer, 0, bufferw * bufferh);
+        memset(buffer2, 1, bufferw * bufferh);
     }
 
     for(int i = 0; i < 60; i++)
@@ -69,7 +77,7 @@ void drawFire()
     for(unsigned int y = 0; y < h; y++)
     {
         buffer[0 + y * w] = 0;
-        buffer[w-1 + y * w] = 0;
+        buffer[w - 1 + y * w] = 0;
     }
 
     for(unsigned int y = 0; y < bufferh - 1; y++)
@@ -88,16 +96,32 @@ void drawFire()
         }
     }
 
-    erase();
+    //erase();
+    unsigned char lastcolor = 0;
+    attron(COLOR_PAIR(lastcolor));
 
     for(unsigned int y = 0; y < h; y++)
     {
+        unsigned int yoffset = y * w;
 
         for(unsigned int x = 0; x < w; x++)
         {
-            unsigned char brightness = buffer[x + y * w];
-            attron(COLOR_PAIR(firepal[brightness]));
-            mvaddch(y, x, 'x');
+
+            unsigned char brightness = buffer[x + yoffset];
+
+            unsigned char color = firepal[brightness];
+
+            if(color != lastcolor)
+            {
+                attron(COLOR_PAIR(firepal[brightness]));
+                lastcolor = color;
+            }
+
+            if(color != buffer2[x + yoffset])
+            {
+                mvaddch(y, x, 'x');
+                buffer2[x+yoffset]=color;
+            }
         }
     }
 
