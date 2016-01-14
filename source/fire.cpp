@@ -113,7 +113,7 @@ void drawFire()
 
             if(color != lastcolor)
             {
-                attron(COLOR_PAIR(firepal[brightness]));
+                attron(COLOR_PAIR(color));
                 lastcolor = color;
             }
 

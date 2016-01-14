@@ -38,7 +38,8 @@ void drawSand()
     getmaxyx(stdscr, h, w);
     static unsigned int bufferw = 99999;
     static unsigned int bufferh = 99999;
-    static unsigned char *buffer = 0;
+    static unsigned char* buffer = 0;
+    static unsigned char* buffer2 = 0;
 
     if(bufferw != w || bufferh != h + 2)
     {
@@ -50,9 +51,16 @@ void drawSand()
             delete buffer;
         }
 
+        if(buffer2 != 0)
+        {
+            delete buffer2;
+        }
+
         setupSandpal();
         buffer = new unsigned char[bufferw * bufferh];
+        buffer2 = new unsigned char[bufferw * bufferh];
         memset(buffer, 0, bufferw * bufferh);
+        memset(buffer2, 1, bufferw * bufferh);
     }
 
     // sand logic here
@@ -145,13 +153,15 @@ void drawSand()
     if(openhole < holedepth)
     {
         openhole++;
-        unsigned char jitteramount=holew/2;
-        if(jitteramount<=1)
+        unsigned char jitteramount = holew / 2;
+
+        if(jitteramount <= 1)
         {
-            jitteramount=2;
+            jitteramount = 2;
         }
+
         unsigned int offset = bufferw * (bufferh - 1);
-        int holejitteredpos = holepos + rand() % jitteramount - jitteramount/2;
+        int holejitteredpos = holepos + rand() % jitteramount - jitteramount / 2;
 
         for(int i = 0; i < holew; i++)
         {
@@ -166,16 +176,31 @@ void drawSand()
 
 
 
-    erase();
+    //erase();
+
+    unsigned char lastcolor = 0;
+    attron(COLOR_PAIR(lastcolor));
 
     for(unsigned int y = 0; y < h; y++)
     {
 
+        unsigned int yoffset = y * w + w;
+
         for(unsigned int x = 0; x < w; x++)
         {
-            unsigned char color = buffer[x + y * w + w];
-            attron(COLOR_PAIR(sandpal[color]));
-            mvaddch(y, x, 'x');
+            unsigned char color = sandpal[buffer[x + yoffset]];
+
+            if(color != lastcolor)
+            {
+                attron(COLOR_PAIR(color));
+                lastcolor = color;
+            }
+
+            if(color != buffer2[x + yoffset + w])
+            {
+                mvaddch(y, x, 'x');
+                buffer2[x + yoffset + w] = color;
+            }
         }
     }
 
