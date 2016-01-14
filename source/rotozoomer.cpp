@@ -73,7 +73,7 @@ void drawRotozoomer()
             if(color != 0)
             {
                 attron(COLOR_PAIR(color));
-                mvprintw(y, x , "x");
+                mvaddch(y, x , 'x');
             }
         }
     }

@@ -44,7 +44,7 @@ void drawZoomer()
             if(result && result2)
             {
                 attron(COLOR_PAIR(colorGradient[brightness][(int)(-distwithtime * 7) % 240]));
-                mvprintw(y, x, "x");
+                mvaddch(y, x, 'x');
             }
         }
     }

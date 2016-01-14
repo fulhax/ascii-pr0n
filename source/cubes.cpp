@@ -412,7 +412,7 @@ void drawline(vec3 v1, vec3 v2)
                     || 0 >= w[1]
                 ))
         {
-            mvprintw(w[1], w[0], "x");
+            mvaddch(w[1], w[0], 'x');
         }
 
         w[0] += v[0];
@@ -425,7 +425,7 @@ void flat_shade(int x1, int x2, int y, int color)
     for(int i = x1; i < x2; i++)
     {
         attron(COLOR_PAIR(color));
-        mvprintw(y, i, "x");
+        mvaddch(y, i, 'x');
     }
 }
 

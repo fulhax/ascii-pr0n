@@ -20,7 +20,7 @@ void drawPattern()
         {
             int brightness = (int)((float)(40 * x) / (float)w * (float)(40 * y) / (float)h + time) % 100;
             attron(COLOR_PAIR(colorGradient[brightness][239]));
-            mvprintw(y, x, "x");
+            mvaddch(y, x, 'x');
         }
     }
 

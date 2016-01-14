@@ -175,7 +175,7 @@ void drawSand()
         {
             unsigned char color = buffer[x + y * w + w];
             attron(COLOR_PAIR(sandpal[color]));
-            mvprintw(y, x, "x");
+            mvaddch(y, x, 'x');
         }
     }
 

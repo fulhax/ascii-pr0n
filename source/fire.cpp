@@ -97,7 +97,7 @@ void drawFire()
         {
             unsigned char brightness = buffer[x + y * w];
             attron(COLOR_PAIR(firepal[brightness]));
-            mvprintw(y, x, "x");
+            mvaddch(y, x, 'x');
         }
     }
 
