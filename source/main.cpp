@@ -14,6 +14,7 @@
 #include "bars.h"
 #include "tunnel.h"
 #include "sand.h"
+#include "physics.h"
 
 void drawRandom()
 {
@@ -97,8 +98,9 @@ int main(int argc, char *argv[])
     bool bars       = 0;
     bool tunnel     = 0;
     bool sand       = 0;
+    bool physicssim = 0;
 
-    while((c = getopt(argc, argv, "bczprftsh")) != -1)
+    while((c = getopt(argc, argv, "bczprftsyh")) != -1)
     {
         switch(c)
         {
@@ -148,6 +150,11 @@ int main(int argc, char *argv[])
                     sand = 1;
                     break;
                 }
+            case 'y':
+                {
+                    physicssim = 1;
+                    break;
+                }
 
             case 'h':
                 {
@@ -159,6 +166,7 @@ int main(int argc, char *argv[])
                     printf("\t-t tunnel\n");
                     printf("\t-z zoomer\n");
                     printf("\t-s sand\n");
+                    printf("\t-y physics simulator\n");
                     return 0;
                 }
 
@@ -232,6 +240,10 @@ int main(int argc, char *argv[])
         else if(sand)
         {
             drawSand();
+        }
+        else if(physicssim)
+        {
+            drawPhysicsSim();
         }
         else
         {
