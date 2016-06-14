@@ -13,8 +13,8 @@ struct ball
 };
 void updatePhysics(ball& b, unsigned int bufferw, unsigned int bufferh)
 {
-    b.x += b.vx * 0.01;
-    b.y += b.vy * 0.01;
+    b.x += b.vx * 0.1;
+    b.y += b.vy * 0.1;
 
     if(b.x > bufferw)
     {
@@ -40,7 +40,7 @@ void updatePhysics(ball& b, unsigned int bufferw, unsigned int bufferh)
         b.y = 0;
     }
 
-    b.vy += 0.02;
+    b.vy += 0.2;
 
 }
 void drawPhysicsSim()
