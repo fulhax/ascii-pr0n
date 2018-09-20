@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "zoomer.h"
 #include "cubes.h"
 #include "pattern.h"
@@ -166,6 +167,7 @@ int main(int argc, char *argv[])
                     printf("\t-t tunnel\n");
                     printf("\t-z zoomer\n");
                     printf("\t-s sand\n");
+                    printf("\t-r rotozoomer\n");
                     printf("\t-y physics simulator\n");
                     return 0;
                 }
@@ -175,6 +177,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    srand(time(0));
     calcGradient();
     correctImageColors();
     initscr();
