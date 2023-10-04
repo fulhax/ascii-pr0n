@@ -2,34 +2,16 @@ BASE_DIR=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 BUILD_DIR=${BASE_DIR}/build/
 
-BUILD_TYPE=debug
-BUILD_INFO=Debug
-ifdef RELEASE_DBG_INFO
-	BUILD_TYPE=release_dbg_info
-	BUILD_INFO=RelWithDebInfo
-	export RELEASE_DBG_INFO=1
-endif
-ifdef RELEASE
-	BUILD_TYPE=release
-	BUILD_INFO=Release
-	export RELEASE=1
-endif
-PLATFORM_LIST=default
-ifdef PLATFORM
-	PLATFORM_LIST=${PLATFORM}
-endif
+.PHONY: all debug release clean distclean
 
-.PHONY: all linux cleanAll clean
-
-all: linux
-
-linux: ${BUILD_DIR}/linux/${BUILD_TYPE}/Makefile
+all: release
+debug release:  %: $(BUILD_DIR)/%/Makefile
 	$(MAKE) -C $(shell dirname $<)
 
-
-${BUILD_DIR}/linux/${BUILD_TYPE}/Makefile: CMakeLists.txt
-	@mkdir -p $(shell dirname $@)
-	cd $(shell dirname $@) && CC=$(shell which clang) CXX=$(shell which clang++) cmake -DCMAKE_BUILD_TYPE=${BUILD_INFO} -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ${BASE_DIR}
+$(BUILD_DIR)/%/Makefile:
+	$(eval BUILD_TYPE:=$(shell dirname $@ | xargs -n1 basename))
+	mkdir -p $(shell dirname $@)
+	cd $(shell dirname $@) && cmake  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=$(BUILD_INFO_$(BUILD_TYPE))  ${BASE_DIR}
 
 
 clean: ${BUILD_DIR}/linux/${BUILD_TYPE}/Makefile
@@ -37,4 +19,3 @@ clean: ${BUILD_DIR}/linux/${BUILD_TYPE}/Makefile
 
 distclean:
 	@rm -rf ${BUILD_DIR}/
-
